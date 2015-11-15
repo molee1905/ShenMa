@@ -17,7 +17,7 @@ then, you will be required to input `sc name` from the the input panel at the bo
 if you want to create a sc named *`news_info`*, and your sc path is *`$HOME/xxx/sc/shortcuts`*, you may see:
 
 `please input shortcut path:` */Users/jack/xxx/sc/shortcuts*
-`please intpu sc name:` *news_info*
+`please input sc name:` *news_info*
 
 
 tips: for now,  this plugin only works on  *OS X*
