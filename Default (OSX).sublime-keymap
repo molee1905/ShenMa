@@ -1,0 +1,5 @@
+[
+    {
+        "keys": ["ctrl+super+n"], "command": "create_sc" 
+    }
+]
