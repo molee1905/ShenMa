@@ -3,6 +3,22 @@ ShenMa for Sublime Text 3
 ### Intro
 This is a scaffold just for self-learning (e.g. how to create a sublime plugin and distribute it).During using [SublimeLinter][1],when i tried to create a linter plugin, i found this in its source code. This plugin is just extracted from [Sublimelinter][1]'s command named *SublimelinterCreateLinterPluginCommand*.
 
+It's a plugin to create projects skeleton based on defined scaffolds, in my work, i call these projects "sc card" (shortcut). Through this plugin, for example when you input `news_detail`, it will generates folders(black) and files(italic) like below: 
+* **news_detail**
+  * **css**
+      * *sc-advanced_news_detail.css*
+  * **data**
+  * **img**
+  * **js**
+      * *sc_news_detail.js*
+  * **res**
+  * **tmpl**
+  * *.eslintrc*
+  * *index.html*
+  * *README.md*
+
+the folders mentioned just now  will be appeared in your input path  (e.g. `/Users/jack/sc/shortcuts/`), and the `news_detail` is called **sc name**, the destination of the folder is called **sc path**
+
 ### Usage
 There are two ways leading you to create a new sc from st3:
 * Command Palette
