@@ -6,7 +6,7 @@ This is a scaffold just for self-learning (e.g. how to create a sublime plugin a
 It's a plugin to create projects skeleton based on defined scaffolds, in my work, i call these projects "sc card" (shortcut). Through this plugin, for example when you input `news_detail`, it will generates folders(black) and files(italic) like below: 
 * **news_detail**
   * **css**
-      * *sc-advanced_news_detail.css*
+      * *sc_advanced_news_detail.css*
   * **data**
   * **img**
   * **js**
@@ -17,7 +17,7 @@ It's a plugin to create projects skeleton based on defined scaffolds, in my work
   * *index.html*
   * *README.md*
 
-the folders mentioned just now  will be appeared in your input path  (e.g. `/Users/jack/sc/shortcuts/`), and the `news_detail` is called **sc name**, the destination of the folder is called **sc path**
+the folders mentioned just now  will be appeared in your input path  (e.g. `/Users/jack/xxx/sc/shortcuts/`), and the `news_detail` is called **sc name**, the destination of the folder is called **sc path**
 
 ### Usage
 There are two ways leading you to create a new sc from st3:
