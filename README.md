@@ -29,6 +29,7 @@ There are two ways leading you to create a new sc from st3:
 then, you will be required to input `sc name` from the the input panel at the bottom of sublime, for the first time when you use, you will be required to input `sc path` too.
 
 `please input shortcut path:` */Users/jack/xxx/sc/shortcuts/*
+
 `please input sc name:` *news_detail*
 
 ---
