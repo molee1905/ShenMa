@@ -1,9 +1,6 @@
-# This is a scaffold just for self-learning (e.g. how to create a sublime plugin and distribute it) 
-# During using SublimeLinter(https://github.com/SublimeLinter/SublimeLinter3), 
-# when i tried to create a linter plugin, i found this in its source code
-# This plugin is just extracted from Sublimelinter's command 
-# named SublimelinterCreateLinterPluginCommand
-#
+# 1.create projects skeleton based on defined scaffolds
+# 2.create eslint.sublime-build
+# 
 # Project: https://github.com/molee1905/ShenMa
 # License: MIT
 # 
@@ -16,14 +13,19 @@ import shutil
 import re
 import subprocess
 import datetime, time
+import json
 
 SHORTCUTS_PATH_RE = re.compile(r'sc[/|\\]shortcuts', re.I)
-SETTINGS_FILE = 'ShenMa.sublime-settings'
 INPUT_SC_NAME = 'please input sc name: '
 INPUT_SC_PATH = 'please input shortcuts path(e.g. xxx/sc/shortcuts): '
 INVALID_SC_PATH = '''please input correct shortcuts path\r(e.g. $HOME/sc/shortcuts)  '''
 ALREADY_EXISTED_ERROR = 'The shortcut “{}” already exists.'
 COPY_ERROR = 'An error occurred while copying the template: {}'
+
+SETTINGS_FILE = 'ShenMa.sublime-settings'
+
+settings = sublime.load_settings(SETTINGS_FILE)
+
 
 def open_directory(path):
     cmd = (get_subl_executable_path(), path)
@@ -40,12 +42,12 @@ def get_subl_executable_path():
 
     return executable_path
 
-class CreateScCommand(sublime_plugin.WindowCommand):
 
+class CreateScCommand(sublime_plugin.WindowCommand):
+    """A command that creates a new sc """
     def run(self):
          
-        self.settings = sublime.load_settings(SETTINGS_FILE)
-        path = self.settings.get('path')
+        path = settings.get('shortcuts')
         
         if not path:
             self.window.show_input_panel(
@@ -84,12 +86,11 @@ class CreateScCommand(sublime_plugin.WindowCommand):
             index = path.index('shortcuts')
             scpath = path[0:index]
             if os.path.exists(scpath):
-                self.settings = sublime.load_settings(SETTINGS_FILE)
-                self.settings.set('path', path)
+                settings.set('shortcuts', path)
                 sublime.save_settings(SETTINGS_FILE)
                 return True
         else: 
-            self.settings.erase('path')
+            settings.erase('shortcuts')
 
         return False
 
@@ -101,9 +102,8 @@ class CreateScCommand(sublime_plugin.WindowCommand):
         self.cssPath = 'sc_advanced_{}.css'.format(name)
         self.jsPath = 'sc_{}.js'.format(name)
 
-        settings = sublime.load_settings(SETTINGS_FILE)
 
-        self.dest = os.path.join(settings.get('path'), self.name)
+        self.dest = os.path.join(settings.get('shortcuts'), self.name)
 
         if os.path.exists(self.dest):
             sublime.error_message(ALREADY_EXISTED_ERROR.format(self.name))
@@ -163,3 +163,30 @@ class CreateScCommand(sublime_plugin.WindowCommand):
                         os.rename(path, os.path.join(dirpath, filename.format(name)))
 
         return True
+
+
+class EslintFixCommand(sublime_plugin.TextCommand):
+    """A command that creates a eslint.sublimt-build file."""
+
+    def run(self, edit):
+
+        build_path = os.path.join(sublime.packages_path(), 'User', 'eslint.sublime-build')
+        
+        if not os.path.exists(build_path):
+
+            print('no exists eslint.sublime-build')
+            
+            exec_path = settings.get('eslint')
+
+            if os.path.exists(exec_path):
+                build = {}
+                build['path'] = exec_path
+                build['cmd'] = ["eslint", "--fix", "$file"]
+
+                build_text = json.dumps(build)
+
+                with open(build_path, mode='w', encoding='utf-8') as f:
+                    f.write(build_text)
+                    print('elint already build, press cmd+b')
+        else:
+            print('eslint build path: ', build_path)
