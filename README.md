@@ -1,5 +1,4 @@
 #ShenMa for Sublime Text 3
----------
 A plugin for shenma
 
 ### Intro
