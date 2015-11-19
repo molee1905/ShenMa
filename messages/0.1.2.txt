@@ -1,0 +1,4 @@
+0.1.2
+-------------------------
+
+- change "Fix js" to "Build ESLint"
