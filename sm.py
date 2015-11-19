@@ -24,7 +24,7 @@ COPY_ERROR = 'An error occurred while copying the template: {}'
 
 SETTINGS_FILE = 'ShenMa.sublime-settings'
 
-settings = sublime.load_settings(SETTINGS_FILE)
+
 
 
 def open_directory(path):
@@ -45,10 +45,12 @@ def get_subl_executable_path():
 
 class CreateScCommand(sublime_plugin.WindowCommand):
     """A command that creates a new sc """
+    
     def run(self):
          
-        path = settings.get('shortcuts')
-        
+        self.settings = sublime.load_settings(SETTINGS_FILE)
+        path = self.settings.get('shortcuts')
+
         if not path:
             self.window.show_input_panel(
                 INPUT_SC_PATH,
@@ -86,11 +88,11 @@ class CreateScCommand(sublime_plugin.WindowCommand):
             index = path.index('shortcuts')
             scpath = path[0:index]
             if os.path.exists(scpath):
-                settings.set('shortcuts', path)
+                self.settings.set('shortcuts', path)
                 sublime.save_settings(SETTINGS_FILE)
                 return True
         else: 
-            settings.erase('shortcuts')
+            self.settings.erase('shortcuts')
 
         return False
 
@@ -103,7 +105,7 @@ class CreateScCommand(sublime_plugin.WindowCommand):
         self.jsPath = 'sc_{}.js'.format(name)
 
 
-        self.dest = os.path.join(settings.get('shortcuts'), self.name)
+        self.dest = os.path.join(self.settings.get('shortcuts'), self.name)
 
         if os.path.exists(self.dest):
             sublime.error_message(ALREADY_EXISTED_ERROR.format(self.name))
