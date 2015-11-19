@@ -32,7 +32,8 @@ There are two ways leading you to create a new sc from st3:
 
 then, you will be required to input `sc name` from the the input panel at the bottom of sublime, for the first time when you use, you will be required to input `sc path` too.
 
-`please input shortcut path:` */Users/jack/xxx/sc/shortcuts/*
+`please input shortcut path:` */Users/jack/test/sc/shortcuts/*
+
 `please input sc name:` *news_detail*
 
 ---
@@ -41,7 +42,7 @@ This plugin also add a command to create `eslint.sublimt-build` to fix your java
 
     1. press `shift+cmd+p` 
     
-    2. type `Fix js`,  and choose the command
+    2. type `Build ESLint`,  and choose the command
 
     3. `cmd+b`
 

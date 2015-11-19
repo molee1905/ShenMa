@@ -4,7 +4,7 @@
     "command": "create_sc"
   },
   {
-    "caption": "SM: Fix JS",
+    "caption": "SM: Build ESLint",
     "command": "eslint_fix"
   }
 ]
