@@ -120,6 +120,11 @@ class CreateScCommand(sublime_plugin.WindowCommand):
             self.temp_dest = os.path.join(self.temp_dir, self.name)
 
             shutil.copytree(src, self.temp_dest)
+            
+            os.mkdir(os.path.join(self.temp_dest, 'data'))
+            os.mkdir(os.path.join(self.temp_dest, 'img'))
+            os.mkdir(os.path.join(self.temp_dest, 'res'))
+            os.mkdir(os.path.join(self.temp_dest, 'tmpl'))
 
             if not self.fill_template(self.temp_dir, self.name):
                 return
