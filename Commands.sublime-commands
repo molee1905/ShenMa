@@ -2,9 +2,5 @@
   {
     "caption": "SM: Create SC",
     "command": "create_sc"
-  },
-  {
-    "caption": "SM: Build ESLint",
-    "command": "eslint_fix"
   }
 ]
