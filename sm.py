@@ -164,29 +164,28 @@ class CreateScCommand(sublime_plugin.WindowCommand):
 
         return True
 
-
-class EslintFixCommand(sublime_plugin.TextCommand):
+def build_eslint_system():
     """A command that creates a eslint.sublimt-build file."""
+    settings = sublime.load_settings(SETTINGS_FILE)
 
-    def run(self, edit):
+    build_path = os.path.join(sublime.packages_path(), 'User', 'eslint.sublime-build')
+    
+    if not os.path.exists(build_path):
 
-        build_path = os.path.join(sublime.packages_path(), 'User', 'eslint.sublime-build')
-        
-        if not os.path.exists(build_path):
+        print('no exists eslint.sublime-build')
+        exec_path = settings.get('eslint')
+        if os.path.exists(exec_path):
+            build = {}
+            build['path'] = exec_path
+            build['cmd'] = ["eslint", "--fix", "$file"]
 
-            print('no exists eslint.sublime-build')
-            
-            exec_path = settings.get('eslint')
+            build_text = json.dumps(build)
 
-            if os.path.exists(exec_path):
-                build = {}
-                build['path'] = exec_path
-                build['cmd'] = ["eslint", "--fix", "$file"]
+            with open(build_path, mode='w', encoding='utf-8') as f:
+                f.write(build_text)
+                print('elint already build, press cmd+b')
+    else:
+        print('eslint build path: ', build_path)
 
-                build_text = json.dumps(build)
+sublime.set_timeout_async(build_eslint_system, 20)
 
-                with open(build_path, mode='w', encoding='utf-8') as f:
-                    f.write(build_text)
-                    print('elint already build, press cmd+b')
-        else:
-            print('eslint build path: ', build_path)
