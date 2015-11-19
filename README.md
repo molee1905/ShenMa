@@ -21,9 +21,13 @@ the folders mentioned just now  will be appeared in your input path  (e.g. `/Use
 ### Usage
 There are two ways leading you to create a new sc from st3:
 * Command Palette
+
     1. press `shift+cmd+p` 
+    
     2. type `create sc`, and choose the command
+
 * Use Shortcut
+
     1. press `ctrl+cmd+n`
 
 then, you will be required to input `sc name` from the the input panel at the bottom of sublime, for the first time when you use, you will be required to input `sc path` too.
@@ -34,9 +38,13 @@ then, you will be required to input `sc name` from the the input panel at the bo
 ---
 
 This plugin also add a command to create `eslint.sublimt-build` to fix your javascript:
-  1. press `shift+cmd+p` 
-  2. type `Fix js`,  and choose the command
-  3. `cmd+b`
+
+    1. press `shift+cmd+p` 
+    
+    2. type `Fix js`,  and choose the command
+
+    3. `cmd+b`
+
 of couse, first of all, you should make sure eslint has been installed, and eslint path is in `ShenMa.sublime-settings` which finally looks like below:
 
 (`Preferences->Package Settings->ShenMa->Settings-User`)
