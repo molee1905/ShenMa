@@ -5,6 +5,7 @@
  * @author __author__
  * @version __version__
  */
+
 (function (fn) {
 
     'use strict';
