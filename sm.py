@@ -28,8 +28,8 @@ SETTINGS_FILE = 'ShenMa.sublime-settings'
 
 
 def open_directory(path):
-    cmd = (get_subl_executable_path(), path)
-    subprocess.Popen(cmd, cwd=path)
+    cmd = (get_subl_executable_path(),'-a',path)
+    subprocess.Popen(cmd)
 
 
 def get_subl_executable_path():
