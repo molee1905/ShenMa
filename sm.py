@@ -170,7 +170,7 @@ class CreateScCommand(sublime_plugin.WindowCommand):
                         os.rename(path, os.path.join(dirpath, filename.format(name)))
 
         return True
-
+'''
 def build_eslint_system():
     """A command that creates a eslint.sublimt-build file."""
     settings = sublime.load_settings(SETTINGS_FILE)
@@ -195,4 +195,35 @@ def build_eslint_system():
         print('eslint build path: ', build_path)
 
 sublime.set_timeout_async(build_eslint_system, 20)
+'''
 
+class FormatJsCommand(sublime_plugin.TextCommand):
+    """format js base on eslint """
+    
+    def run(self, edit):
+        settings = sublime.load_settings(SETTINGS_FILE)
+        NODE_HOME = settings.get('node_home')
+        NODE_BIN = os.path.join(NODE_HOME,'bin')
+        node_path = os.path.join(NODE_BIN,'node')
+        eslint_path = os.path.join(NODE_BIN,'eslint')
+        # region = sublime.Region(0, self.view.size())
+        # content = self.view.substr(region)
+
+        if not NODE_HOME:
+            sublime.error_message('请在配置中添加nodejs路径')
+            return
+        if not os.path.exists(NODE_HOME):
+            sublime.error_message('nodejs路径错误')
+            return
+
+        filename = self.view.file_name()
+        if not filename.lower().endswith('.js'):
+            return
+        filename = os.path.abspath(filename)
+        args = [node_path, eslint_path, '--fix', filename]
+        proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        fmt, err = proc.communicate()
+
+        print('fmt: ', fmt.decode('utf-8'))
+
+        

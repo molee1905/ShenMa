@@ -24,11 +24,13 @@ There are two ways leading you to create a new sc from st3:
 
     1. press `shift+cmd+p` 
     
-    2. type `create sc`, and choose the command
+    2. type `create sc`, and choose the command to create sc
+    3. type `format js`, and choose the command to format js
 
 * Use Shortcut
 
-    1. press `ctrl+cmd+n`
+    1. press `ctrl+cmd+n` to create sc
+    2. press `ctrl+cmd+f` to format js base on eslint
 
 then, you will be required to input `sc name` from the the input panel at the bottom of sublime, for the first time when you use, you will be required to input `sc path` too.
 
@@ -45,6 +47,7 @@ of couse, first of all, you should make sure eslint has been installed, and esli
 (`Preferences->Package Settings->ShenMa->Settings-User`)
 ```json
   {
+    "node_home": "/usr/local/node/v0.12.7",
     "eslint": "/usr/local/node/v0.12.7/bin",
     "shortcuts": "/Users/jack/test/sc/shortcuts"
   }
