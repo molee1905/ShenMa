@@ -2,21 +2,20 @@
 A plugin for shenma
 
 ### Intro
-It's a plugin to create projects skeleton based on defined scaffolds, in my work, i call these projects "sc card" (shortcut). Through this plugin, for example when you input `news_detail`, it will generates folders(black) and files(italic) like below: 
-* **news_detail**
+It's a plugin to create projects skeleton based on defined scaffolds. Through this plugin, for example when you input `test`, it will generates folders(black) and files(italic) like below: 
+* **test**
     - **css**
-          - *sc_advanced_news_detail.css*
+          - *sc_advanced_test.scss*
     - **data**
     - **img**
     - **js**
-          - *sc_news_detail.js*
+          - *sc_test.js*
     - **res**
     - **tmpl**
-    - *.eslintrc*
     - *index.html*
     - *README.md*
 
-the folders mentioned just now  will be appeared in your input path  (e.g. `/Users/jack/test/sc/shortcuts/`), and the `news_detail` is called **sc name**, the destination of the folder is called **sc path**
+the folders mentioned just now  will be appeared in your input path  (e.g. `/Users/jack/test/sc/shortcuts/`), and the `test` is called **sc name**, the destination of the folder is called **sc path**
 
 ### Usage
 There are two ways leading you to create a new sc from st3:
@@ -36,7 +35,7 @@ then, you will be required to input `sc name` from the the input panel at the bo
 
 `please input shortcut path:` */Users/jack/test/sc/shortcuts/*
 
-`please input sc name:` *news_detail*
+`please input sc name:` *test*
 
 ---
 
@@ -47,8 +46,8 @@ of couse, first of all, you should make sure eslint has been installed, and esli
 (`Preferences->Package Settings->ShenMa->Settings-User`)
 ```json
   {
-    "node_home": "/usr/local/node/v0.12.7",
-    "eslint": "/usr/local/node/v0.12.7/bin",
+    "node_bin": "/usr/local/bin/node",
+    "eslint_bin": "/usr/local/bin/eslint",
     "shortcuts": "/Users/jack/test/sc/shortcuts"
   }
 

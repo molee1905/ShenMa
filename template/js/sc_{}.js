@@ -11,9 +11,9 @@
     'use strict';
 
     fn['__name__'] = function (opts) {
-        
+
         var scope = this;
-        
+
         function init() {
 
             bindEvent();
