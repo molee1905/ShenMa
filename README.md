@@ -5,11 +5,11 @@ A plugin for shenma
 It's a plugin to create projects skeleton based on defined scaffolds. Through this plugin, for example when you input `test`, it will generates folders(black) and files(italic) like below: 
 * **test**
     - **css**
-          - *sc_advanced_test.scss*
+        - *sc_advanced_test.scss*
     - **data**
     - **img**
     - **js**
-          - *sc_test.js*
+        - *sc_test.js*
     - **res**
     - **tmpl**
     - *index.html*
@@ -44,6 +44,7 @@ This plugin also add a command to create `eslint.sublimt-build` to fix your java
 of couse, first of all, you should make sure eslint has been installed, and eslint path is in `ShenMa.sublime-settings` which finally looks like below:
 
 (`Preferences->Package Settings->ShenMa->Settings-User`)
+
 ```json
   {
     "node_bin": "/usr/local/bin/node",

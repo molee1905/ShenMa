@@ -180,10 +180,10 @@ class FormatJsCommand(sublime_plugin.TextCommand):
         ESLINT_BIN = settings.get('eslint_bin')
 
         if not NODE_BIN:
-            sublime.error_message('请在配置中添加nodejs路径')
+            sublime.error_message('please add node path in your config file')
             return
         if not os.path.exists(NODE_BIN):
-            sublime.error_message('nodejs路径错误')
+            sublime.error_message('invalid node path')
             return
 
         filename = self.view.file_name()
@@ -194,4 +194,4 @@ class FormatJsCommand(sublime_plugin.TextCommand):
         proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         fmt, err = proc.communicate()
 
-        print('fmt: ', fmt.decode('utf-8'))
+        print('format result: ', fmt.decode('utf-8'))
