@@ -1,5 +1,4 @@
 # 1.create projects skeleton based on defined scaffolds
-# 2.create eslint.sublime-build
 # 
 # Project: https://github.com/molee1905/ShenMa
 # License: MIT

@@ -1,8 +1,5 @@
 [
     {
         "keys": ["ctrl+super+n"], "command": "create_sc" 
-    },
-    {
-        "keys": ["ctrl+super+f"], "command": "format_js" 
     }
 ]

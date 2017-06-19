@@ -2,9 +2,5 @@
   {
     "caption": "SM: Create SC",
     "command": "create_sc"
-  },
-  {
-    "caption": "SM: Format JS",
-    "command": "format_js"
   }
 ]

@@ -1,5 +1,4 @@
 {
-    "node_bin": "",
-    "eslint_bin": "",
+    "node_bin": "/usr/local/bin/node",
     "shortcuts": ""
 }

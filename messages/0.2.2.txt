@@ -1,0 +1,5 @@
+0.2.2
+-------------------------
+
+- the setting of eslint has been deprecated
+- rm format js
