@@ -25,8 +25,6 @@ COPY_ERROR = 'An error occurred while copying the template: {}'
 SETTINGS_FILE = 'ShenMa.sublime-settings'
 
 
-
-
 def open_directory(path):
     cmd = (get_subl_executable_path(),'-a',path)
     subprocess.Popen(cmd)
@@ -97,30 +95,31 @@ class CreateScCommand(sublime_plugin.WindowCommand):
         return False
 
     
-    def render(self, name):
-        self.name = name
+    def render(self, scpath):
+        self.scpath = scpath
+        self.name = os.path.basename(scpath) or os.path.dirname(scpath)
         self.author = os.getlogin()
-        self.clzName = 'sc_{}'.format(name)
-        self.cssPath = 'sc_advanced_{}.css'.format(name)
-        self.jsPath = 'sc_{}.js'.format(name)
-
-
-        self.dest = os.path.join(self.settings.get('shortcuts'), self.name)
+        self.clzName = ('' if self.name.endswith('_lg') else 'card ') + 'sc_{}'.format(self.name)
+        self.cssPath = 'sc_advanced_{}.css'.format(self.name)
+        self.jsPath = 'sc_{}.js'.format(self.name)
+        self.dest = os.path.join(self.settings.get('shortcuts'), self.scpath)
 
         if os.path.exists(self.dest):
-            sublime.error_message(ALREADY_EXISTED_ERROR.format(self.name))
+            sublime.error_message(ALREADY_EXISTED_ERROR.format(self.scpath))
             return
-
+        else:
+            os.makedirs(self.dest)
+        
         src = os.path.join(sublime.packages_path(), os.path.dirname(__file__), 'template')
 
         self.temp_dir = None
 
         try:
             self.temp_dir = tempfile.mkdtemp()
-            self.temp_dest = os.path.join(self.temp_dir, self.name)
+            self.temp_dest = os.path.join(self.temp_dir, self.scpath)
 
             shutil.copytree(src, self.temp_dest)
-            
+
             os.mkdir(os.path.join(self.temp_dest, 'data'))
             os.mkdir(os.path.join(self.temp_dest, 'img'))
             os.mkdir(os.path.join(self.temp_dest, 'res'))
@@ -129,7 +128,9 @@ class CreateScCommand(sublime_plugin.WindowCommand):
             if not self.fill_template(self.temp_dir, self.name):
                 return
             
-            shutil.move(self.temp_dest, self.dest)
+            for f in os.listdir(self.temp_dest):
+                shutil.move(os.path.join(self.temp_dest, f), self.dest)
+            
             open_directory(self.dest)
 
         except Exception as ex:
@@ -170,28 +171,3 @@ class CreateScCommand(sublime_plugin.WindowCommand):
                         os.rename(path, os.path.join(dirpath, filename.format(name)))
 
         return True
-
-class FormatJsCommand(sublime_plugin.TextCommand):
-    """format js base on eslint """
-    
-    def run(self, edit):
-        settings = sublime.load_settings(SETTINGS_FILE)
-        NODE_BIN = settings.get('node_bin')
-        ESLINT_BIN = settings.get('eslint_bin')
-
-        if not NODE_BIN:
-            sublime.error_message('please add node path in your config file')
-            return
-        if not os.path.exists(NODE_BIN):
-            sublime.error_message('invalid node path')
-            return
-
-        filename = self.view.file_name()
-        if not filename.lower().endswith('.js'):
-            return
-        filename = os.path.abspath(filename)
-        args = [NODE_BIN, ESLINT_BIN, '--fix', filename]
-        proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        fmt, err = proc.communicate()
-
-        print('format result: ', fmt.decode('utf-8'))
