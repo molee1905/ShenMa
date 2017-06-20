@@ -45,7 +45,6 @@ of couse, first of all, you should make sure eslint has been installed, and esli
 
 ```json
   {
-    "node_bin": "/usr/local/bin/node",
     "shortcuts": "/Users/jack/test/sc/shortcuts"
   }
 

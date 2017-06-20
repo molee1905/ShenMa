@@ -1,0 +1,5 @@
+0.2.3
+-------------------------
+
+- the setting of node has been deprecated
+
