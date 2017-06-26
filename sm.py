@@ -98,7 +98,8 @@ class CreateScCommand(sublime_plugin.WindowCommand):
         self.scpath = scpath
         self.name = os.path.basename(scpath) or os.path.dirname(scpath)
         self.author = os.getlogin()
-        self.clzName = ('' if self.name.endswith('_lg') else 'card ') + 'sc_{}'.format(self.name)
+        self.id = 'sc_{}'.format(self.name)
+        self.clzName = ('' if self.name.endswith('_lg') else 'card ') + self.id
         self.cssPath = 'sc_advanced_{}.css'.format(self.name)
         self.jsPath = 'sc_{}.js'.format(self.name)
         self.dest = os.path.join(self.settings.get('shortcuts'), self.scpath)
@@ -141,7 +142,9 @@ class CreateScCommand(sublime_plugin.WindowCommand):
     def fill_template(self, template_dir, name):
 
         placeholders = {
+            '__path__': self.scpath,
             '__author__': self.author,
+            '__id__': self.id,
             '__name__': self.name,
             '__clz__': self.clzName,
             '__csspath__': self.cssPath,
